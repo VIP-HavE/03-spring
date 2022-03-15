@@ -1,12 +1,173 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+    <!--bean实现时，name由setter实现-->
     <bean id="person" class="com.hcy.bean.Person">
         <property name="id" value="1"></property>
         <property name="name" value="hcyname"></property>
         <property name="age" value="20"></property>
         <property name="gender" value="男"></property>
+        <property name="date" value="2022/03/14"></property>
     </bean>
+    <!--构造器实现:需要有参构造器-->
+    <!--构造器实现时，name由有参构造方法的参数列表决定-->
+    <bean id="person2" class="com.hcy.bean.Person">
+        <constructor-arg name="id" value="2"></constructor-arg>
+        <constructor-arg name="name" value="hcyname2"></constructor-arg>
+        <constructor-arg name="age" value="21"></constructor-arg>
+        <constructor-arg name="gender" value="男"></constructor-arg>
+    </bean>
+
+
+    <!--更多的。。。-->
+    <!--在使用构造器赋值时可省略name属性，但要求严格按照构造器参数顺序-->
+    <!--
+    name:表示参数列表的名称
+    value:表示实际的具体值
+    type:表示值的类型
+    index:表示值的下标，从0开始
+    -->
+    <bean id="person3" class="com.hcy.bean.Person">
+        <constructor-arg value="1"></constructor-arg>
+        <constructor-arg value="lisi"></constructor-arg>
+        <constructor-arg value="20"></constructor-arg>
+        <constructor-arg value="女"></constructor-arg>
+    </bean>
+    <!--若不按照顺序来添加参数值，可搭配index属性使用-->
+    <bean id="person4" class="com.hcy.bean.Person">
+        <constructor-arg value="lisi" index="1"></constructor-arg>
+        <constructor-arg value="1" index="0"></constructor-arg>
+        <constructor-arg value="女" index="3"></constructor-arg>
+        <constructor-arg value="20" index="2"></constructor-arg>
+    </bean>
+
+    <!--
+    当有多个参数数量相同的构造方法存在时，默认情况下是覆盖的过程，后面的构造方法会覆盖前面的构造方法
+    如果非要赋值给另外一个构造方法的话，可以使用type的参数来进行指定
+    -->
+    <bean id="person5" class="com.hcy.bean.Person">
+        <constructor-arg  value="4"></constructor-arg>
+        <constructor-arg  value="wangwu" ></constructor-arg>
+        <constructor-arg  value="22"  type="int"></constructor-arg>
+    </bean>
+
+    <!--总结：
+         在日常工作中，一般都是用name,value的方式，很少有人去使用index或者type的方式，但是要注意各种情况出现的问题-->
+
+
+    <!--使用P命名空间给属性赋值-->
+    <bean id="person6" class="com.hcy.bean.Person"
+    p:id="5" p:name="wangwu" p:age="25" p:gender="女">
+    </bean>
+
+    <!--复杂类型赋值操作-->
+    <bean id="person7" class="com.hcy.bean.Person">
+        <property name="id" value="7"></property>
+        <property name="name" value="hcyname7"></property>
+        <property name="age" value="27"></property>
+        <property name="gender" value="男7"></property>
+        <!--数组赋值, 使用array标签-->
+            <!--<property name="hobbies" value="book, girl, movie"></property>
+                数组类型有很多，限制字符串有局限性，因此不常用-->
+        <property name="hobbies">
+            <array>
+                <value>book</value>
+                <value>girl</value>
+                <value>movie</value>
+            </array>
+        </property>
+        <!--给引用类型赋值, 可以使用ref引入外部bean-->
+        <property name="address" ref="address"></property>
+        <!--给List赋值-->
+             <!--<property name="lists" value="1, 2, 3"></property>
+             与数组直接赋值一样，有局限性-->
+        <property name="lists" >
+            <list>
+                <!--方式一：使用内部bean，无法从IOC容器中获取对象的值-->
+                <bean id="address2" class="com.hcy.bean.Address">
+                    <property name="province" value="市1"></property>
+                </bean>
+                <bean class="com.hcy.bean.Address">
+                    <property name="province" value="市2"></property>
+                </bean>
+                <!--方式二:使用外部bean，可以从IOC容器中获取对象的值-->
+                <ref bean="address"></ref>
+            </list>
+        </property>
+        <!--给Set赋值-->
+        <property name="sets">
+            <set>
+                <value>zhangsan</value>
+                <value>zhangsan</value>
+                <value>lisi</value>
+            </set>
+        </property>
+        <!--给Map赋值-->
+        <property name="maps">
+            <map>
+                <!--用法一-->
+                <entry key="a" value="aaa"></entry>
+                <!--用法二-->
+                <entry key="address" value-ref="address"></entry>
+                <!--用法三-->
+                <entry key="address2">
+                    <bean class="com.hcy.bean.Address">
+                        <property name="province" value="省map"></property>
+                    </bean>
+                </entry>
+                <!--用法四-->
+                <entry>
+                    <key><!--key中不能直接写字符串，需要套value标签-->
+                        <value>key1</value>
+                    </key>
+                    <value>value1</value>
+                </entry>
+                <!--用法五-->
+                <entry key="list">
+                    <list>
+                        <value>list1</value>
+                        <value>list2</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+        <!--给properties赋值-->
+        <property name="properties">
+            <props>
+                <prop key="prokey1">prokey11</prop>
+                <prop key="prokey2">prokey21</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="address" class="com.hcy.bean.Address">
+        <property name="province" value="省"></property>
+        <property name="city" value="市"></property>
+        <property name="town" value="镇"></property>
+
+    </bean>
+
+    <!--bean之间的继承关系-->
+    <!--可以通过parent属性来获取父bean中的某些属性值-->
+    <!--可以使用abstract标签定义抽象bean，无法进行实例化-->
+    <bean id="parent" class="com.hcy.bean.Person" abstract="false">
+        <property name="id" value="1"></property>
+        <property name="name" value="zhangsan"></property>
+        <property name="age" value="22"></property>
+        <property name="gender" value="男"></property>
+    </bean>
+    <bean id="son" class="com.hcy.bean.Person" parent="parent">
+        <property name="name" value="sonname"></property>
+    </bean>
+
+    <!--创建bean的时候依赖关系
+    当bean对象被创建的时候，是按照xml配置文件定义的顺序创建的，谁在前，谁就先被创建
+        如果需要干扰创建的顺序，可以使用depends-on属性
+    一般在实际工作中不必在意bean创建的顺序，无论谁先创建，需要依赖的对象在创建完成之后都会进行赋值操作
+    -->
+    <!--以下bean生效需要注释上述所有非必要配置-->
+    <bean id="address" class="com.hcy.bean.Address" depends-on="person"></bean>
+    <bean id="person" class="com.hcy.bean.Person"></bean>
+
 </beans>

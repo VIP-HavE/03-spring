@@ -1,5 +1,12 @@
 package com.hcy.bean;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
 /**
  * @Auther HCY
  * @Date 2022/3/13 21:22
@@ -11,8 +18,39 @@ public class Person {
     private int age;
     private String gender;
 
+    private Date date;
+    private String[] hobbies;
+    private Address address;
+
+    private List<Address> lists;
+    private Set<String> sets;
+    private Map<String, Object> maps;
+    private Properties properties;
+
+
     public Person() {
         System.out.println("Person被创建。");
+    }
+
+    public Person(int id, String name, int age, String gender) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    public Person(int id, String name, String gender) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        System.out.println("ING...");
+    }
+
+    public Person(int id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        System.out.println("INA...");
     }
 
     public void setId(int id) {
@@ -31,6 +69,34 @@ public class Person {
         this.gender = gender;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setHobbies(String[] hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setLists(List<Address> lists) {
+        this.lists = lists;
+    }
+
+    public void setSets(Set<String> sets) {
+        this.sets = sets;
+    }
+
+    public void setMaps(Map<String, Object> maps) {
+        this.maps = maps;
+    }
+
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -38,6 +104,13 @@ public class Person {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
+                ", date=" + date +
+                ", hobbies=" + Arrays.toString(hobbies) +
+                ", address=" + address +
+                ", lists=" + lists +
+                ", sets=" + sets +
+                ", maps=" + maps +
+                ", properties=" + properties +
                 '}';
     }
 }
