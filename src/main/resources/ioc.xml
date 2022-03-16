@@ -166,8 +166,28 @@
         如果需要干扰创建的顺序，可以使用depends-on属性
     一般在实际工作中不必在意bean创建的顺序，无论谁先创建，需要依赖的对象在创建完成之后都会进行赋值操作
     -->
-    <!--以下bean生效需要注释上述所有非必要配置-->
-    <bean id="address" class="com.hcy.bean.Address" depends-on="person"></bean>
-    <bean id="person" class="com.hcy.bean.Person"></bean>
+    <!--以下两条bean生效需要注释上述所有非必要配置-->
+    <!--<bean id="address" class="com.hcy.bean.Address" depends-on="person"></bean>
+    <bean id="person" class="com.hcy.bean.Person"></bean>-->
 
+
+    <!--设置bean对象的作用域-->
+    <!--通过scope属性可以指定当前bean的作用域
+        singleton：单例模式 - 从IOC容器中获取的都是同一个对象，默认的作用域
+        prototype: 多例模式 - 从IOC容器中获取的对象每次都是新创建
+
+            不重要 - 此外，在spring4.X版本中还包含另外两种作用域：
+            不重要 -    request: 每次发送请求都会有一个新的对象   （例如：点击浏览器中的淘宝按钮）
+            不重要 -    session: 每一次会话都会有一个新的对象     （例如：打开浏览器）
+            不重要 -        但 几乎不用，5中被淘汰
+
+         注意：
+            如果是singleton作用域的话，每次在创建IOC容器完成之前此对象已经创建完成
+            如果是prototype作用域的话，每次是在需要用到此对象的时候才会创建
+
+        -->
+    <bean id="person8" class="com.hcy.bean.Person" scope="singleton"></bean>
+    <bean id="person9" class="com.hcy.bean.Person" scope="prototype"></bean>
+
+    <!--工厂模式创建对象-->
 </beans>

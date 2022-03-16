@@ -66,5 +66,13 @@ public class MyTest {
         System.out.println(son);
         Person parent = context.getBean("parent", Person.class);
         System.out.println(parent);*/
+
+        /*//单例双例模式
+        Person person8 = context.getBean("person8", Person.class);
+        Person person81 = context.getBean("person8", Person.class);
+        System.out.println("单例模式比较：" +(person8 == person81));
+        Person person9 = context.getBean("person9", Person.class);
+        Person person91 = context.getBean("person9", Person.class);
+        System.out.println("多例模式比较：" +(person9 == person91));*/
     }
 }
