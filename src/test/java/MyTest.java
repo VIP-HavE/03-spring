@@ -74,5 +74,17 @@ public class MyTest {
         Person person9 = context.getBean("person9", Person.class);
         Person person91 = context.getBean("person9", Person.class);
         System.out.println("多例模式比较：" +(person9 == person91));*/
+
+        //工厂模式
+        //静态模式
+        Person person10 = context.getBean("person10", Person.class);
+        System.out.println(person10);
+        //实例模式
+        Person person11 = context.getBean("person11", Person.class);
+        System.out.println(person11);
+
+        //继承FactoryBean来创建对象
+        Person myFactoryBean = context.getBean("myFactoryBean", Person.class);
+        System.out.println(myFactoryBean);
     }
 }

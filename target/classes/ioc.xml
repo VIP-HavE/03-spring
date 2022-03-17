@@ -190,4 +190,18 @@
     <bean id="person9" class="com.hcy.bean.Person" scope="prototype"></bean>
 
     <!--工厂模式创建对象-->
+    <!--静态工厂: 类名.静态方法()-->
+    <bean id="person10" class="com.hcy.factory.PersonStaticFactory" factory-method="getInstance">
+        <constructor-arg value="zhangsan"></constructor-arg>
+    </bean>
+    <!--实例工程：先创建工厂实例，然后调用工厂实例的方法-->
+    <!--factory-bean: 表示具体实例类的实例
+        factory-method: 表示具体工厂实例的方法
+        -->
+    <bean id="instanceFactory" class="com.hcy.factory.PersonInstanceFactory"></bean>
+    <bean id="person11" class="com.hcy.bean.Person" factory-bean="instanceFactory" factory-method="getInstance">
+        <constructor-arg value="lisi"></constructor-arg>
+    </bean>
+
+    <bean id="myFactoryBean" class="com.hcy.factory.MyFactoryBean"></bean>
 </beans>
