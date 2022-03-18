@@ -203,5 +203,13 @@
         <constructor-arg value="lisi"></constructor-arg>
     </bean>
 
+<!--    //继承FactoryBean来创建对象-->
     <bean id="myFactoryBean" class="com.hcy.factory.MyFactoryBean"></bean>
+
+    <!--spring容器在创建对象的时候可以指定具体的初始化和销毁方法
+    init-method: 在对象创建完成之后会调用初始化方法
+    destory-method: 在容器关闭的时候会调用销毁方法-->
+    <bean id="person" class="com.hcy.bean.Person" init-method="init" destroy-method="destory">
+
+    </bean>
 </beans>
