@@ -75,16 +75,21 @@ public class MyTest {
         Person person91 = context.getBean("person9", Person.class);
         System.out.println("多例模式比较：" +(person9 == person91));*/
 
-        //工厂模式
+        /*//工厂模式
         //静态模式
         Person person10 = context.getBean("person10", Person.class);
         System.out.println(person10);
         //实例模式
         Person person11 = context.getBean("person11", Person.class);
-        System.out.println(person11);
+        System.out.println(person11);*/
 
-        //继承FactoryBean来创建对象
+        /*//继承FactoryBean来创建对象
         Person myFactoryBean = context.getBean("myFactoryBean", Person.class);
-        System.out.println(myFactoryBean);
+        System.out.println(myFactoryBean);*/
+
+        //bean对象的初始化和销毁方法
+        Person person12 = context.getBean("person12", Person.class);
+        System.out.println("初始化：" + person12);
+        ((ClassPathXmlApplicationContext)context).close();
     }
 }

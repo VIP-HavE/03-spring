@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
     <!--bean实现时，name由setter实现-->
     <bean id="person" class="com.hcy.bean.Person">
         <property name="id" value="1"></property>
@@ -203,13 +203,19 @@
         <constructor-arg value="lisi"></constructor-arg>
     </bean>
 
-<!--    //继承FactoryBean来创建对象-->
+    <!-- //继承FactoryBean来创建对象-->
     <bean id="myFactoryBean" class="com.hcy.factory.MyFactoryBean"></bean>
 
     <!--spring容器在创建对象的时候可以指定具体的初始化和销毁方法
     init-method: 在对象创建完成之后会调用初始化方法
     destory-method: 在容器关闭的时候会调用销毁方法-->
-    <bean id="person" class="com.hcy.bean.Person" init-method="init" destroy-method="destory">
+    <!--初始化和销毁的方法与scope属性是相关联的
+        如果是singleton的话，初始化和销毁的方法都存在
+        如果是prototype的话，初始化方法会调用，但是销毁的方法不会调用-->
+    <bean id="person12" class="com.hcy.bean.Person" init-method="init" destroy-method="destory" scope="prototype">
 
     </bean>
+    <bean id="myBeanPostProcessor" class="com.hcy.bean.MyBeanPostProcessor"></bean>
+    <!--即使类中无初始方法也会调用BeanPostProcessor-->
+    <bean id="address2" class="com.hcy.bean.Address"></bean>
 </beans>

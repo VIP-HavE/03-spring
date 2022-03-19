@@ -1,5 +1,6 @@
 package com.hcy.bean;
 
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +52,16 @@ public class Person {
         this.name = name;
         this.age = age;
         System.out.println("INA...");
+    }
+
+    public void init(){
+        //编写N行逻辑代码完成初始化功能
+        System.out.println("person对象初始化完成");
+    }
+
+    public void destory(){
+        //编写N行逻辑代码完成初始化功能
+        System.out.println("person对象被销毁");
     }
 
     public void setId(int id) {
