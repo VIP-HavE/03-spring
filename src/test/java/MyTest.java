@@ -1,3 +1,4 @@
+import com.alibaba.druid.pool.DruidDataSource;
 import com.hcy.bean.Address;
 import com.hcy.bean.Person;
 import org.springframework.context.ApplicationContext;
@@ -87,9 +88,23 @@ public class MyTest {
         Person myFactoryBean = context.getBean("myFactoryBean", Person.class);
         System.out.println(myFactoryBean);*/
 
-        //bean对象的初始化和销毁方法
+        /*//bean对象的初始化和销毁方法
         Person person12 = context.getBean("person12", Person.class);
         System.out.println("初始化：" + person12);
-        ((ClassPathXmlApplicationContext)context).close();
+        ((ClassPathXmlApplicationContext)context).close();*/
+
+        /*//spring管理第三方bean
+        DruidDataSource dataSource = context.getBean("dataSource", DruidDataSource.class);
+        System.out.println(dataSource);
+        //System.out.println(dataSource.getConnection());*/
+
+/*        //导入外部的配置文件
+        DruidDataSource dataSource2 = context.getBean("dataSource2", DruidDataSource.class);
+        System.out.println(dataSource2);
+        //System.out.println(dataSource2.getConnection());*/
+
+        Person person = context.getBean("person14", Person.class);
+        System.out.println(person);
+
     }
 }
